@@ -66,4 +66,27 @@ where issued_id = 'IS134'
 
 -- Task 15: Branch Performance Report Create a query that generates a performance report for each branch, showing the number of books issued, the number of books returned, and the total revenue generated from book rentals.
 
+create table branch_report
+as
+select 
+	b.branch_id,
+	b.manager_id,
+	count(isst.issued_id) as total_books_issued,
+	count(re.return_id) as total_books_returned,
+	sum(bk.rental_price) as total_revenue
+
+from issued_status as isst
+join employee as e
+on e.emp_id = isst.issued_emp_id
+join branch as b
+on e.branch_id = b.branch_id
+left join return_status as re
+on re.issued_id = isst.issued_id
+join books as bk
+on isst.issued_book_isbn = bk.isbn
+
+group by 1,2
+order by 1 asc, 2 asc;
+
+select * from branch_report;
 
