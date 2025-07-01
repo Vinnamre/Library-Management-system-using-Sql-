@@ -116,3 +116,43 @@ join branch as b
 on e.branch_id = b.branch_id
 
 group by 1,3;
+
+
+
+-- Task 18:  Stored Procedure Objective: Create a stored procedure to manage the status of books in a library system. Description: Write a stored procedure that updates the status of a book in the library based on its issuance. The procedure should function as follows: The stored procedure should take the book_id as an input parameter. The procedure should first check if the book is available (status = 'yes'). If the book is available, it should be issued, and the status in the books table should be updated to 'no'. If the book is not available (status = 'no'), the procedure should return an error message indicating that the book is currently not available.
+
+create or replace procedure issue_book(p_issued_id varchar(10), p_member_id varchar(10), p_book_isbn varchar(30), p_emp_id varchar(10))
+language plpgsql
+as $$
+	declare
+		v_status varchar(10);
+		v_title varchar(75);
+	begin
+		select
+			status, book_title into v_status, v_title
+		from books
+		where isbn = p_book_isbn;
+
+		if v_status = 'yes' then 
+
+			insert into issued_status (issued_id, issued_member_id, issued_book_name, issued_date, issued_book_isbn, issued_emp_id)
+			values (p_issued_id, p_member_id, v_title, current_date, p_book_isbn, p_emp_id);
+
+			update books
+				set status = 'no'
+			where isbn = p_book_isbn;
+
+			raise notice 'Book recods add sucessfully';
+
+		else
+
+			raise notice 'Sorry the book is not available';
+
+		end if;
+		
+	end;
+$$
+
+select * from books
+
+call issue_book('IS155', 'C108', '978-0-330-25864-8', 'E104')
