@@ -102,3 +102,17 @@ where member_id in (
 	where issued_date >= current_date - interval '15' month );
 
 select * from active_members;
+
+-- Task 17: Find Employees with the Most Book Issues Processed Write a query to find the top 3 employees who have processed the most book issues. Display the employee name, number of books processed, and their branch.
+
+select
+	e.emp_name,
+	count(issued_id) as books_issued,
+	b.*
+from issued_status as ist
+join employee as e
+on ist.issued_emp_id = e.emp_id
+join branch as b
+on e.branch_id = b.branch_id
+
+group by 1,3;
