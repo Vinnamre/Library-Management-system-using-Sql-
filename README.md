@@ -30,7 +30,7 @@ select * from books;
 
 Task 2: Update an Existing Member's Address
 Refresh a member's address with ease!
-```
+``` sql
 update members
 set member_address = '125 Oak St'
 where member_id = 'C103';
@@ -38,7 +38,7 @@ where member_id = 'C103';
 
 Task 3: Delete a Record from the Issued Status Table
 Objective: Remove the record with issued_id = 'IS104' from the issued_status table.
-```
+```sql
 delete from issued_status
 where issued_id = 'IS121';
 ```
@@ -47,7 +47,7 @@ where issued_id = 'IS121';
 Task 4: Retrieve All Books Issued by a Specific Employee
 Objective: Fetch all books issued by the employee with emp_id = 'E101'.
 
-```
+```sql
 select * from issued_status
 where issued_emp_id = 'E101';
 ```
@@ -55,7 +55,7 @@ where issued_emp_id = 'E101';
 Task 5: List Members Who Have Issued More Than One Book
 Objective: Use GROUP BY to spotlight members with multiple book issues.
 
-```
+```sql
 select 
 	issued_member_id,
 	count(issued_id)
@@ -68,7 +68,7 @@ having count(issued_id) > 1;
 
 Task 6: Create Summary Tables
 Leverage CTAS to craft new tables showcasing each book and total book_issued_cnt.
-```
+```sql
 create table book_issued_counts as
 select 
 	b.isbn as book_id,
@@ -86,7 +86,7 @@ select * from book_issued_counts;
 
 Task 7: Retrieve All Books in a Specific Category
 Explore books by category!
-```
+```sql
 select * from books
 where category = 'Classic';
 ```
@@ -94,7 +94,7 @@ where category = 'Classic';
 
 Task 8: Find Total Rental Income by Category
 Calculate the revenue per category.
-```
+```sql
 select 
 	b.category as category,
 	sum(b.rental_price) as total_price,
@@ -109,7 +109,7 @@ select
 
 Task 9: List Members Who Registered in the Last 180 Days
 Highlight new members!
-```
+```sql
 select * from members
 insert into members(member_id, member_name, member_address, reg_date)
 values
@@ -123,7 +123,7 @@ where reg_date >= current_date - interval '180 days';
 
 Task 10: List Employees with Their Branch Manager's Name and Branch Details
 Get the full employee-branch scoop.
-```
+```sql
 select
 	e1.emp_id,
 	e1.emp_name,
@@ -140,7 +140,7 @@ on e2.emp_id = b.manager_id;
 
 Task 11: Create a Table of Books with Rental Price Above a Certain Threshold
 Filter high-value rentals.
-```
+```sql
 create table expensive_books as
 select * from books
 where rental_price > 7.00;
@@ -151,7 +151,7 @@ select * from expensive_books
 
 Task 12: Retrieve the List of Books Not Yet Returned
 Track outstanding books.
-```
+```sql
 select 
 	i.issued_id,
 	i.issued_book_name,
@@ -167,7 +167,7 @@ where r.return_id is NULL;
 
 Task 13: Identify Members with Overdue Books
 Spot members with books overdue (assume a 450-day return period). Show member's name, book title, issue date, and days overdue.
-```
+```sql
 select 
 	m.member_id,
 	m.member_name,
@@ -190,7 +190,7 @@ select
 
 Task 14: Update Book Status on Return
 Set books to "available" in the books table upon return (based on return_status entries).
-```
+```sql
 create or replace procedure books_st (pt_return_id varchar(10), pt_issued_id varchar(10))
 language plpgsql
 as $$
@@ -225,7 +225,7 @@ where issued_id = 'IS134'
 
 Task 15: Branch Performance Report
 Generate a report for each branch with books issued, returned, and total rental revenue.
-```
+```sql
 create table branch_report
 as
 select 
@@ -254,7 +254,7 @@ select * from branch_report;
 
 Task 16: CTAS: Create a Table of Active Members
 Build an active_members table for members with at least one book issued in the last 6 months.
-```
+```sql
 create table active_members
 as
 select * from members
@@ -269,7 +269,7 @@ select * from active_members;
 
 Task 17: Find Employees with the Most Book Issues Processed
 Rank the top 3 employees by books processed, including name, count, and branch.
-```
+```sql
 select
 	e.emp_name,
 	count(issued_id) as books_issued,
@@ -289,7 +289,7 @@ Task 18: Stored Procedure
 Objective: Build a stored procedure to manage book status.
 Description: Update book status: 'no' on issue, 'yes' on return.
 
-```
+```sql
 create or replace procedure issue_book(p_issued_id varchar(10), p_member_id varchar(10), p_book_isbn varchar(30), p_emp_id varchar(10))
 language plpgsql
 as $$
