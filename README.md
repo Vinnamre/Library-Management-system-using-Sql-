@@ -8,6 +8,7 @@ Welcome to the Library Management System repository! This project brings to life
 
 
 🎉 Project Tasks
+
 ![library_erd](https://github.com/user-attachments/assets/b7105baf-adbe-486a-adfc-b1271e7691ec)
 
 
