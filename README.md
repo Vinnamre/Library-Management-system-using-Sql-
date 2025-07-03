@@ -3,10 +3,14 @@
 Welcome to the Library Management System repository! This project brings to life a dynamic database schema designed to manage library operations efficiently. It includes tables for branches, books, employees, issued status, return status, and members. Dive in and explore!
 
 
+![image (11)](https://github.com/user-attachments/assets/8bdda2ad-c442-4bc7-bd62-0cd0049ac3dd)
 
 
 
 🎉 Project Tasks
+![library_erd](https://github.com/user-attachments/assets/b7105baf-adbe-486a-adfc-b1271e7691ec)
+
+
 
 ✨ 2. CRUD Operations
 
