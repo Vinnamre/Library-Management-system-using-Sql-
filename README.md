@@ -335,7 +335,7 @@ This project is a vibrant toolkit for mastering library management through SQL! 
 
 
 
-🚀 How Others Can Use This Repo
+🚀 How to use
 
 
 
