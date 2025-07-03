@@ -22,6 +22,7 @@ Welcome to the Library Management System repository! This project brings to life
 Task 1: Create a New Book Record
 Add a new book with details: '978-1-60129-456-2', 'To Kill a Mockingbird', 'Classic', 6.00, 'yes', 'Harper Lee', 'J.B. Lippincott & Co.')
 
+``` sql
 insert into books(isbn, book_title, category, rental_price, status, author, publisher)
 values ('978-1-60129-456-2', 'To Kill a Mockingbird', 'Classic', 6.00, 'yes', 'Harper Lee', 'J.B. Lippincott & Co.');
 select * from books;
