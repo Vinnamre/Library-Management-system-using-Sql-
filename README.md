@@ -348,7 +348,6 @@ Clone the Repository: Grab it with git clone https://github.com/vinnamre/Library
 Set Up the Database: Load the schema into your SQL database (e.g., MySQL, PostgreSQL) and add sample data.
 
 
-
 Execute Tasks: Run the SQL queries under each task to bring the system to life.
 
 
